@@ -293,7 +293,7 @@ func (o baseOptions) Drive(driveStr string) string {
 }
 
 func (o baseOptions) Spice(port uint, password string) string {
-	return fmt.Sprintf("-spice port=%d,password=%s,seamless-migration=on", port, password)
+	return fmt.Sprintf("-spice port=%d,password=%s,seamless-migration=on,streaming-video=all", port, password)
 }
 
 func (o baseOptions) Chardev(backend string, id string, name string) string {
@@ -337,7 +337,7 @@ func (o baseOptions) VdiSpice(spicePort uint, pciBus string) []string {
 	return []string{
 		o.Device("intel-hda,id=sound0"),
 		o.Device("hda-duplex,id=sound0-codec0,bus=sound0.0,cad=0"),
-		fmt.Sprintf("-spice port=%d,disable-ticketing=off,seamless-migration=on", spicePort),
+		fmt.Sprintf("-spice port=%d,disable-ticketing=off,seamless-migration=on,streaming-video=all", spicePort),
 		// # ,streaming-video=all,playback-compression=on,jpeg-wan-compression=always,zlib-glz-wan-compression=always,image-compression=glz" % (5900+vnc_port)
 		o.Device(fmt.Sprintf("virtio-serial-pci,id=virtio-serial0,max_ports=16,bus=%s", pciBus)),
 		o.Chardev("spicevmc", "vdagent", "vdagent"),
@@ -498,7 +498,9 @@ func (o baseOptions_x86_64) PvpanicDevice() string {
 func (o baseOptions_x86_64) VdiSpice(spicePort uint, pciBus string) []string {
 	baseOpts := o.baseOptions.VdiSpice(spicePort, pciBus)
 	vga := o.Device("qxl-vga,id=video0,ram_size=141557760,vram_size=141557760")
-	return append([]string{vga}, baseOpts...)
+	streamingVideoDevice := o.Device("virtserialport,chardev=charchannel1,id=channel1,name=org.spice-space.stream.0")
+	streamingVideoChardevice := o.Chardev("spiceport", "charchannel1", "org.spice-space.stream.0")
+	return append([]string{vga, streamingVideoDevice, streamingVideoChardevice}, baseOpts...)
 }
 
 type baseOptions_aarch64 struct {
