@@ -497,7 +497,7 @@ func (o baseOptions_x86_64) PvpanicDevice() string {
 
 func (o baseOptions_x86_64) VdiSpice(spicePort uint, pciBus string) []string {
 	baseOpts := o.baseOptions.VdiSpice(spicePort, pciBus)
-	vga := o.Device("qxl-vga,id=video0,ram_size=141557760,vram_size=141557760")
+	vga := o.Device("qxl-vga,id=video0,ram_size_mb=64,vram64_size_mb=64,vgamem_mb=64")
 	streamingVideoDevice := o.Device("virtserialport,chardev=charchannel1,id=channel1,name=org.spice-space.stream.0")
 	streamingVideoChardevice := o.Chardev("spiceport", "charchannel1", "org.spice-space.stream.0")
 	return append([]string{vga, streamingVideoDevice, streamingVideoChardevice}, baseOpts...)
