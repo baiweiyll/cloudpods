@@ -475,8 +475,9 @@ func (s *SKVMGuestInstance) initGuestVga(pciRoot *desc.PCIController) {
 	case "qxl":
 		vgaDevName = "qxl-vga"
 		options = map[string]string{
-			"ram_size":  "141557760",
-			"vram_size": "141557760",
+			"ram_size_mb":    "64",
+			"vram64_size_mb": "64",
+			"vgamem_mb":      "64",
 		}
 	case "cirros":
 		vgaDevName = "cirrus-vga"
@@ -542,6 +543,7 @@ func (s *SKVMGuestInstance) initSpiceDevices(pciRoot *desc.PCIController) {
 	spice.Options = map[string]string{
 		"disable-ticketing":  "off",
 		"seamless-migration": "on",
+		"streaming-video":    "all",
 	}
 
 	s.Desc.VdiDevice.Spice = spice

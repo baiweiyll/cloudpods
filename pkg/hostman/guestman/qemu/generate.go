@@ -102,6 +102,19 @@ func generateSpiceOptions(port uint, spice *desc.SSpiceDesc) []string {
 	opts = append(opts, generatePCIDeviceOption(spice.VdagentSerial.PCIDevice))
 	opts = append(opts, chardevOption(spice.Vdagent))
 	opts = append(opts, virtSerialPortOption(spice.VdagentSerialPort, spice.VdagentSerial.Id))
+	//  add spice stream update by baiwei 20231207 start
+	streamingVideo := &desc.VirtSerialPort{
+		Chardev: "charchannel1",
+		Name:    "org.spice-space.stream.0",
+	}
+	streamingChar := &desc.CharDev{
+		Backend: "spiceport",
+		Id:      "charchannel1",
+		Name:    "org.spice-space.stream.0",
+	}
+	opts = append(opts, chardevOption(streamingChar))
+	opts = append(opts, virtSerialPortOption(streamingVideo, "channel1"))
+	//  add spice stream update by baiwei 20231207 end
 
 	// usb redirct
 	opts = append(opts, usbRedirOptions(spice.UsbRedirct)...)
