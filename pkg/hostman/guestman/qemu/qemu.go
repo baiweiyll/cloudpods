@@ -344,10 +344,17 @@ func (o baseOptions) VdiSpice(spicePort uint, pciBus string) []string {
 		o.Device("virtserialport,nr=1,bus=virtio-serial0.0,chardev=vdagent,name=com.redhat.spice.0"),
 
 		// usb redirect
-		o.Device("ich9-usb-ehci1,id=usbspice"),
-		o.Device("ich9-usb-uhci1,masterbus=usbspice.0,firstport=0,multifunction=on"),
-		o.Device("ich9-usb-uhci2,masterbus=usbspice.0,firstport=2"),
-		o.Device("ich9-usb-uhci3,masterbus=usbspice.0,firstport=4"),
+		//o.Device("ich9-usb-ehci1,id=usbspice"),
+		//o.Device("ich9-usb-uhci1,masterbus=usbspice.0,firstport=0,multifunction=on"),
+		//o.Device("ich9-usb-uhci2,masterbus=usbspice.0,firstport=2"),
+		//o.Device("ich9-usb-uhci3,masterbus=usbspice.0,firstport=4"),
+		//o.Chardev("spicevmc", "usbredirchardev1", "usbredir"),
+		//o.Device("usb-redir,chardev=usbredirchardev1,id=usbredirdev1"),
+		//o.Chardev("spicevmc", "usbredirchardev2", "usbredir"),
+		//o.Device("usb-redir,chardev=usbredirchardev2,id=usbredirdev2"),
+
+		//  usb redirect update by baiwei 2024-1-11
+		o.Device("nec-usb-xhci,id=usb"),
 		o.Chardev("spicevmc", "usbredirchardev1", "usbredir"),
 		o.Device("usb-redir,chardev=usbredirchardev1,id=usbredirdev1"),
 		o.Chardev("spicevmc", "usbredirchardev2", "usbredir"),
