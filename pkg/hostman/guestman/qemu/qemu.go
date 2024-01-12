@@ -354,7 +354,7 @@ func (o baseOptions) VdiSpice(spicePort uint, pciBus string) []string {
 		//o.Device("usb-redir,chardev=usbredirchardev2,id=usbredirdev2"),
 
 		//  usb redirect update by baiwei 2024-1-11
-		o.Device("nec-usb-xhci,id=usb"),
+		o.Device("nec-usb-xhci,id=usb3"),
 		o.Chardev("spicevmc", "usbredirchardev1", "usbredir"),
 		o.Device("usb-redir,chardev=usbredirchardev1,id=usbredirdev1"),
 		o.Chardev("spicevmc", "usbredirchardev2", "usbredir"),
