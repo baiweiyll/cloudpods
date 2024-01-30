@@ -100,8 +100,8 @@ type ComputeOptions struct {
 	// snapshot options
 	AutoSnapshotDay               int `default:"1" help:"Days auto snapshot disks, default 1 day"`
 	AutoSnapshotHour              int `default:"2" help:"What hour take sanpshot, default 02:00"`
-	DefaultMaxSnapshotCount       int `default:"10" help:"Per Disk max snapshot count, default 9"`
-	DefaultMaxManualSnapshotCount int `default:"4" help:"Per Disk max manual snapshot count, default 2"`
+	DefaultMaxSnapshotCount       int `default:"10" help:"Per Disk max snapshot count, default 10"`
+	DefaultMaxManualSnapshotCount int `default:"4" help:"Per Disk max manual snapshot count, default 4"`
 
 	//snapshot policy options
 	RetentionDaysLimit  int `default:"49" help:"Days of snapshot retention, default 49 days"`
