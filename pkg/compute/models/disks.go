@@ -2450,7 +2450,6 @@ func (manager *SDiskManager) FetchCustomizeColumns(
 		if ok && utils.IsInStringArray(storageType, append(api.SHARED_FILE_STORAGE, api.STORAGE_LOCAL)) {
 			log.Infof("baiwei test DefaultMaxManualSnapshotCount %d", options.Options.DefaultMaxManualSnapshotCount)
 			rows[i].MaxManualSnapshotCount = options.Options.DefaultMaxManualSnapshotCount
-			rows[i].MaxManualSnapshotCount = 5
 			snps, _ := snapshots[diskIds[i]]
 			rows[i].ManualSnapshotCount = len(snps)
 		}
