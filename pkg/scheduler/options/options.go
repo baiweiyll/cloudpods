@@ -127,7 +127,6 @@ var (
 func Init() {
 	common_options.ParseOptions(&Options, os.Args, "region.conf", api.SERVICE_TYPE)
 	options.Options = Options.ComputeOptions
-	log.Infof("baiwei options.Options %+v", options.Options)
 }
 
 func OnOptionsChange(oldO, newO interface{}) bool {
@@ -146,6 +145,6 @@ func OnOptionsChange(oldO, newO interface{}) bool {
 	}
 
 	options.Options = newOpts.ComputeOptions
-
+	log.Infof("baiwei options.Options %+v", options.Options)
 	return changed
 }
