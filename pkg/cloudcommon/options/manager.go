@@ -103,6 +103,8 @@ func copyOptions(dst, src interface{}) {
 func optionsEquals(newOpts interface{}, oldOpts interface{}) bool {
 	newOptsDict := jsonutils.Marshal(newOpts).(*jsonutils.JSONDict)
 	oldOptsDict := jsonutils.Marshal(oldOpts).(*jsonutils.JSONDict)
+	log.Infof("baiwei newOptsDict: %+V", newOptsDict)
+	log.Infof("baiwei oldOptsDict: %+V", oldOptsDict)
 
 	deleted, diff, _, added := jsonutils.Diff(oldOptsDict, newOptsDict)
 
