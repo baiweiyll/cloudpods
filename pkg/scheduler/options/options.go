@@ -15,7 +15,6 @@
 package options
 
 import (
-	"github.com/coredns/coredns/plugin/pkg/log"
 	"os"
 
 	api "yunion.io/x/onecloud/pkg/apis/scheduler"
@@ -145,6 +144,5 @@ func OnOptionsChange(oldO, newO interface{}) bool {
 	}
 
 	options.Options = newOpts.ComputeOptions
-	log.Infof("baiwei options.Options %+v", options.Options)
 	return changed
 }
